@@ -1,5 +1,19 @@
 import requests
 import os
-if __name__ == "__main__":
+import schedule
+import time
+
+
+def job():
     link = os.environ['APILINK']
-    requests.get(link)
+    try:
+        requests.get(link)
+    except:
+        None
+
+
+if __name__ == "__main__":
+    schedule.every(20).minutes.do(job)
+    while True:
+        schedule.run_pending()
+        time.sleep(60)
